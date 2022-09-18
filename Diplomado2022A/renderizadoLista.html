@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- INCLUSIÓN DIRECTA CON SCRIPT -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>Renderizado de lista</title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="currency in currencies">
+                {{currency}}
+            </li>
+        </ul>
+        <ul>
+            <li v-for="(country, index) in countries">
+                {{index + '-' + country }}
+            </li>
+        </ul>
+
+    </div>
+    
+</body>
+<script>
+    var vue = new Vue({
+        el:'#app',
+        data: {
+            currencies: ["USD", "COP", "MXN"],
+            countries: ["USA", "COL", "MEX"]
+        }
+    })
+</script>
+</html>

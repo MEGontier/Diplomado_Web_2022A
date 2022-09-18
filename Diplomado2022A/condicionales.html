@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- INCLUSIÓN DIRECTA CON SCRIPT -->
+     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <label for="product"> Producto</label>
+        <input type="number" v-model.number="items">
+        <br />
+        <p v-if="hasItems() && !moreThanFive()">
+            Tu orden tiene {{items}} productos
+        </p>
+        <p v-else-if="moreThanFive()">
+            Tu orden tiene {{items}}. <br>
+            Descuento aplicable: %20
+        </p>
+        <p v-else>
+            NO TIENES PRODUCTOS SELECCIONADOS
+        </p>
+    </div>
+    
+</body>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            items: 0
+        },
+        methods: {
+            hasItems: function()    {
+                return this.items > 0;
+            },
+            moreThanFive: function() {
+                return this.items > 5;
+            }
+        }
+    })
+</script>
+</html>
