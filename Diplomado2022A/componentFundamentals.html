@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- INCLUSIÓN DIRECTA CON SCRIPT -->
+     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>Fundamentos de componentes</title>
+</head>
+<body>
+
+    <div id="app">
+        <h1>Reutilización de componentes</h1>
+        <click-counter></click-counter>
+        <click-counter></click-counter>
+        <click-counter></click-counter>
+    </div>
+    
+</body>
+
+<script>
+    // Creacion de un componente con registro Global
+    Vue.component('click-counter',{
+        template: '<button @click="count++">{{count}}</button>',
+        data(){
+            return{
+                count: 0
+            }
+        }
+    })
+    new Vue({
+        el: '#app'
+    })
+
+</script>
+
+</html>

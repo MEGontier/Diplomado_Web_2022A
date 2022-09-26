@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- INCLUSIÓN DIRECTA CON SCRIPT -->
+     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+     <style type="text/css">
+        .stock{
+            text-decoration: line-through;
+            color: brown;
+        }
+        .priority{
+            text-decoration: solid;
+            color: blue;
+        }
+     </style>
+    <title>Ejercicio</title>
+</head>
+<body>
+    <div id="product-list">
+            <h1>{{header.toLocaleUpperCase()}}</h1>
+            <!-- <input type="text" v-model="header"> -->
+
+            <div v-if="status === 'edit'" id="form"> 
+                 <input type="text" v-model="newItem" placeholder="Agrega un producto" v-on:keyup.enter="SaveItem">
+                 <p>{{characterCount}}/20</p>
+                 <button v-on:click="SaveItem" v-bind:disabled="newItem.length === 0"> Guardar</button>
+            </div>
+            <br>
+            <button v-if="status === 'default'" v-on:click="changeStatus('edit')">Agregar productos</button>
+            <button v-else v-on:click="changeStatus('default')">Cancelar</button>
+
+            <ul>
+                <li v-for="product in reverseProducts" :class="{stock: product.inStock === false}" @click="changeStock(product)">
+                    {{product.label}}
+                </li>
+            </ul>
+            <p v-if="products.length === 0"> lista de productos vacia</p>
+    </div>
+    
+</body>
+<script>
+    var app = new Vue({
+        el: '#product-list',
+        data: {
+            status: 'default',
+            header: 'Lista de productos',
+            newItem: '',
+            products: [
+                {
+                    label: 'Monitor',
+                    inStock: false,
+                    highPriority: true
+                },
+                {
+                    label: 'Teclado',
+                    inStock: true,
+                    highPriority: false
+                },
+                {
+                    label: 'Mouse',
+                    inStock: true,
+                    highPriority: true
+                }
+                
+            ]
+        },
+        methods: {
+            SaveItem: function (){
+                this.products.push(
+                    {
+                        label: this.newItem,
+                        inStock: true
+                    }
+
+                );
+                this.newItem= '';
+            },
+            changeStatus: function(newStatus){
+                this.status = newStatus;
+                this.newItem = '';
+            },
+            changeStock: function (product){
+                product.inStock = !product.inStock;
+            }
+        },
+        computed: {
+            characterCount(){
+                return this.newItem.length;
+            },
+            reverseProducts(){
+                return this.products.slice(0).reverse();
+            }
+        }
+    });
+</script>
+
+</html>

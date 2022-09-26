@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- INCLUSIÓN DIRECTA CON SCRIPT -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <title>Notification Message</title>
+</head>
+
+<body>
+    <div id="app" class="ui container">
+        <p></p>
+        <h1>NOTIFICATION CENTER</h1>
+        <!-- USO DE TEMPLATE NOTIFICATION MESSAGE -->
+        <notification-message type="error" header="ERROR!">
+            <p>Metodo de pago incorrecto, intenta con otra tarjeta</p>
+        </notification-message>
+        <notification-message type="success" header="BIENVENIDO">
+            <p>REGISTRO EXITOSO</p>
+        </notification-message>
+        <notification-message type="warning" header="PRECAUCION">
+            <p>Tarjeta Rechazada</p>
+        </notification-message>
+        <notification-message type="info" header="HOLA">
+            <ul class="list">
+                <li>It's good to see you again.</li>
+                <li>Did you know it's been a while?</li>
+            </ul>
+        </notification-message>
+
+        <notification-message>
+        
+        </notification-message>
+       
+    </div>
+
+</body>
+
+<!-- TEMPLATE PARA EL CENTRO DE NOTIFICACIONES -->
+<script type="text/x-template" id="notification-message-template">
+     <!-- Notification Message Markup
+        Types: Info, Warning, Error, Success -->
+        <div class="ui message" :class="type" v-if="!hidden">
+            <i class="close icon" @click="hide"></i>
+            <div class="header">
+                {{header}}
+            </div>
+            <!-- <ul class="list">
+                <li>It's good to see you again.</li>
+                <li>Did you know it's been a while?</li>
+            </ul> -->
+            <slot></slot>
+        </div>
+</script>
+
+
+<script>
+    // COMPONENTE DE VUE
+    Vue.component('notification-message',{
+        template: '#notification-message-template',
+        props:{
+            type: {
+                type: String,
+                
+            },
+            header:{
+                type: String,
+                default: 'Usuario'
+            }
+        },
+        data(){
+            return{
+                hidden: false
+            }
+        },
+        methods: {
+            hide(){
+                this.hidden = true
+            }
+        }
+    })
+    new Vue({
+        el: '#app',
+    })
+</script>
+
+</html>

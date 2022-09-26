@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- INCLUSIÓN DIRECTA CON SCRIPT -->
+     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+     <!-- Definicion de estilos para el template -->
+     <style type="text/css">
+        .chart{
+            border: 1px solid;
+            padding: 10px;
+        }
+     </style>
+    <title>Slots con Nombre</title>
+</head>
+<body>
+    <div id="app">
+        <text-chart>
+            <h1 slot="header">HEADER</h1>
+            <p slot="body">Body</p>
+        </text-chart>
+    </div>
+</body>
+
+<script>
+    Vue.component('text-chart',{
+        template: `
+        <div class="chart">
+            <div class="header">
+                <slot name="header"></slot>
+             </div>
+            <div class="body">
+                <slot name="body"></slot>
+            </div>
+        </div>
+        `
+    })
+    new Vue({
+        el: '#app',
+    })
+</script>
+
+</html>
